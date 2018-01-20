@@ -202,6 +202,7 @@ var Main = (function (_super) {
         this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this);
         this.updateInfo(TouchCollideStatus.NO_TOUCHED);
     };
+    // 터치한 좌표에 _dot Shape를 옮겨주고, _bird 객체에 닿았는지 확인 및 글귀 바뀜
     Main.prototype.checkCollision = function (stageX, stageY) {
         /***  The key code section of this sample begins ***/
         var bResult = this._bird.hitTestPoint(stageX, stageY, this._bShapeTest);
@@ -218,6 +219,7 @@ var Main = (function (_super) {
                 this.checkCollision(evt.stageX, evt.stageY);
                 break;
             case egret.TouchEvent.TOUCH_BEGIN:
+                // 화면 터치 시작시 _dot Shape를 stage에 추가 및 충돌 확인할 좌표를 전해줌
                 if (!this._txInfo.hitTestPoint(evt.stageX, evt.stageY)) {
                     this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this);
                     this.stage.once(egret.TouchEvent.TOUCH_END, this.touchHandler, this);

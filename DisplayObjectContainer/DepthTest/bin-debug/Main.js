@@ -170,21 +170,16 @@ var Main = (function (_super) {
         rightBird.touchEnabled = true;
         rightBird.pixelHitTest = true;
         this.addChild(rightBird);
-        /***  The following code adds listening events to 3 button3 ***/
+        // pixelHitTest로 더 정확하게 충돌체크를 할 수 있음, bitmap의 표현된 투명한 영역도 터치 확인해서 더 정밀함
+        // 이미지를 클릭하면 depth를 바꿔줌
         upBird.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            /***  The key code section of this sample begins ***/
             _this.setChildIndex(upBird, _this.numChildren - 1);
-            /***  The key code section of this sample ends ***/
         }, this);
         leftBird.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            /***  The key code section of this sample begins ***/
             _this.setChildIndex(leftBird, _this.numChildren - 1);
-            /***  The key code section of this sample ends ***/
         }, this);
         rightBird.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            /***  The key code section of this sample begins ***/
             _this.setChildIndex(rightBird, _this.numChildren - 1);
-            /***  The key code section of this sample ends ***/
         }, this);
         /// prompt
         this._txInfo = new egret.TextField;

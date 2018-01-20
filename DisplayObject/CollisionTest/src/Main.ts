@@ -155,6 +155,7 @@ class Main extends egret.DisplayObjectContainer {
         this.updateInfo( TouchCollideStatus.NO_TOUCHED );
     }
 
+    // 터치한 좌표에 _dot Shape를 옮겨주고, _bird 객체에 닿았는지 확인 및 글귀 바뀜
     private checkCollision( stageX:number, stageY:number ) {
         /***  The key code section of this sample begins ***/
         var bResult:boolean = this._bird.hitTestPoint( stageX, stageY, this._bShapeTest );
@@ -171,10 +172,12 @@ class Main extends egret.DisplayObjectContainer {
     private touchHandler( evt:egret.TouchEvent ){
         switch ( evt.type ){
             case egret.TouchEvent.TOUCH_MOVE:
+                // BEGIN에서 생성된 _dot Shape를 터치지역으로 이동시키기위해 좌표 전달                
                 this.checkCollision( evt.stageX, evt.stageY );
                 break;
             case egret.TouchEvent.TOUCH_BEGIN:
-                if( !this._txInfo.hitTestPoint( evt.stageX, evt.stageY ) ){ /// Make sure that the touch start position is not in the text area
+                // text 지역이 아닌 곳에 화면 터치 시작시 _dot Shape를 stage에 추가 및 충돌 확인할 좌표를 전해줌
+                if( !this._txInfo.hitTestPoint( evt.stageX, evt.stageY ) ){ 
                     this.stage.addEventListener( egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this );
                     this.stage.once( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
                     this.addChild( this._dot );
@@ -182,6 +185,7 @@ class Main extends egret.DisplayObjectContainer {
                 }
                 break;
             case egret. TouchEvent.TOUCH_END:
+                // MOVE 이벤트를 지우고, 다시 터치할때를 위해 BEGIN 이벤트 추가 및 _dot Shape를 지움
                 this.stage.removeEventListener( egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this );
                 this.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
                 if( this._dot.parent ){

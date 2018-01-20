@@ -116,23 +116,20 @@ class Main extends egret.DisplayObjectContainer {
         rightBird.touchEnabled = true;
         rightBird.pixelHitTest = true;
         this.addChild(rightBird);
-        /***  The following code adds listening events to 3 button3 ***/
-        upBird.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            /***  The key code section of this sample begins ***/
-            this.setChildIndex(upBird, this.numChildren - 1);
-            /***  The key code section of this sample ends ***/
+        
+        // pixelHitTest로 더 정확하게 충돌체크를 할 수 있음, bitmap의 표현된 투명한 영역도 터치 확인해서 더 정밀함
+        // 이미지를 클릭하면 depth를 바꿔줌
+
+        upBird.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {            
+            this.setChildIndex(upBird, this.numChildren - 1);            
         }, this );      
         
-        leftBird.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            /***  The key code section of this sample begins ***/
-            this.setChildIndex(leftBird, this.numChildren - 1);
-            /***  The key code section of this sample ends ***/
+        leftBird.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {            
+            this.setChildIndex(leftBird, this.numChildren - 1);            
         }, this );      
         
-        rightBird.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            /***  The key code section of this sample begins ***/
-            this.setChildIndex(rightBird, this.numChildren - 1);
-            /***  The key code section of this sample ends ***/
+        rightBird.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {            
+            this.setChildIndex(rightBird, this.numChildren - 1);            
         }, this); 
 
         /// prompt

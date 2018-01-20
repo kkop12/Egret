@@ -220,9 +220,8 @@ var Main = (function (_super) {
         this._txInfo.x = this.stage.stageWidth / 2 - this._txInfo.width / 2;
         this._txInfo.y = 10;
         this.addChild(this._txInfo);
-        /*** The following code adds listening events to 2 buttons ***/
+        // Left text를 누르면 display에 있는지 확인 후 지우고 Left Container에 생성시킴. 만약 Right text에 있다면 지우고 Left Contatiner로 생성함.
         this.leftTF.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            /***  The key code section of this sample begins ***/
             if (_this.getChildIndex(egretBird) != -1) {
                 _this.removeChild(egretBird);
                 leftCon.addChild(egretBird);
@@ -237,10 +236,9 @@ var Main = (function (_super) {
             }
             leftCon.touchEnabled = true;
             rightCon.touchEnabled = false;
-            /*** The key code section of this sample ends ***/
         }, this);
+        // Right text를 누르면 display에 있는지 확인 후 지우고 Right Container에 생성시킴. 만약 Left text에 있다면 지우고 Right Contatiner로 생성함.
         this.rightTF.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
-            /***  The key code section of this sample begins ***/
             if (_this.getChildIndex(egretBird) != -1) {
                 _this.removeChild(egretBird);
                 rightCon.addChild(egretBird);
@@ -255,11 +253,10 @@ var Main = (function (_super) {
             }
             leftCon.touchEnabled = false;
             rightCon.touchEnabled = true;
-            /*** The key code section of this sample ends ***/
         }, this);
-        /*** Add dragging code to the two containers. ***/
         var leftDrag = false;
         var rightDrag = false;
+        // Left container에 egretBird가 있다면 container를 드래그로 움직일 수 있음
         leftCon.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
             leftDrag = true;
         }, this);
@@ -272,6 +269,7 @@ var Main = (function (_super) {
                 leftCon.y = e.stageY - leftCage.height / 2;
             }
         }, this);
+        // Right container에 egretBird가 있다면 container를 드래그로 움직일 수 있음
         rightCon.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
             rightDrag = true;
         }, this);

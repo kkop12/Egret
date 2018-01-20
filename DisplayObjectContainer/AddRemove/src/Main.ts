@@ -147,45 +147,37 @@ class Main extends egret.DisplayObjectContainer {
         downRightBird.x = downRight.x + downRight.width/2 - downRightBird.width/2;
         downRightBird.y = downRight.y + downRight.height/2 - downRightBird.height/2;
         
-        /*** The following code adds listening events to the 4 areas ***/
-        upLeft.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
-            /***  The key code section of this sample begins ***/
+        // 4방향에 관한 Shape지역에 관해 터치 이벤트를 확인하고, 각 방향지역에 Bird 이미지가 있는지 없는지 확인 후 생성 및 삭제함
+        upLeft.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{            
             if(this.contains(upLeftBird)){
                 this.removeChild(upLeftBird);
             }else{
                 this.addChild(upLeftBird);
-            }
-            /***  The key code section of this sample ends ***/
+            }            
         }, this );      
         
-        upRight.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
-            /***  The key code section of this sample begins ***/
+        upRight.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{            
             if(this.contains(upRightBird)){
                 this.removeChild(upRightBird);
             }else{
                 this.addChild(upRightBird);
-            }
-            /***  The key code section of this sample ends ***/
+            }            
         }, this );      
         
-        downLeft.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
-            /***  The key code section of this sample begins ***/
+        downLeft.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{            
             if(this.contains(downLeftBird)){
                 this.removeChild(downLeftBird);
             }else{
                 this.addChild(downLeftBird);
-            }
-            /***  The key code section of this sample ends ***/
+            }            
         }, this );      
         
-        downRight.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{
-            /***  The key code section of this sample begins ***/
+        downRight.addEventListener( egret.TouchEvent.TOUCH_TAP, ()=>{            
             if(this.contains(downRightBird)){
                 this.removeChild(downRightBird);
             }else{
                 this.addChild(downRightBird);
-            }
-            /***  The key code section of this sample ends ***/
+            }            
         }, this );       
 
         /// prompt

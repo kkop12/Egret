@@ -140,7 +140,7 @@ class Main extends egret.DisplayObjectContainer {
         leftCage.graphics.lineTo(250,250);
         leftCage.graphics.lineTo(0,250);
         leftCage.graphics.lineTo(0,0);
-        leftCage.graphics.endFill();
+        leftCage.graphics.endFill();        
         leftCon.addChild(leftCage);
 
         leftCon.x = this.stage.stageWidth / 4 - leftCon.width / 2;
@@ -176,10 +176,9 @@ class Main extends egret.DisplayObjectContainer {
         this._txInfo.x = this.stage.stageWidth/2 - this._txInfo.width/2;
         this._txInfo.y = 10;
         this.addChild( this._txInfo );
-
-        /*** The following code adds listening events to 2 buttons ***/
-        this.leftTF.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            /***  The key code section of this sample begins ***/
+                
+        // Left text를 누르면 display에 있는지 확인 후 지우고 Left Container에 생성시킴. 만약 Right text에 있다면 지우고 Left Contatiner로 생성함.
+        this.leftTF.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {            
             if (this.getChildIndex(egretBird) != -1) {
                 this.removeChild(egretBird);
                 leftCon.addChild(egretBird);
@@ -192,12 +191,11 @@ class Main extends egret.DisplayObjectContainer {
                 egretBird.y = leftCage.height / 2 - egretBird.height / 2;
             } 
             leftCon.touchEnabled = true;
-            rightCon.touchEnabled = false;
-            /*** The key code section of this sample ends ***/
+            rightCon.touchEnabled = false;            
         }, this);
 
-        this.rightTF.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            /***  The key code section of this sample begins ***/
+        // Right text를 누르면 display에 있는지 확인 후 지우고 Right Container에 생성시킴. 만약 Left text에 있다면 지우고 Right Contatiner로 생성함.
+        this.rightTF.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {            
             if (this.getChildIndex(egretBird) != -1) {
                 this.removeChild(egretBird);
                 rightCon.addChild(egretBird);
@@ -210,13 +208,13 @@ class Main extends egret.DisplayObjectContainer {
                 egretBird.y = rightCage.height / 2 - egretBird.height / 2;
             }
             leftCon.touchEnabled = false;
-            rightCon.touchEnabled = true;
-            /*** The key code section of this sample ends ***/
+            rightCon.touchEnabled = true;            
         }, this); 
-
-        /*** Add dragging code to the two containers. ***/
+        
         var leftDrag: boolean = false;
         var rightDrag: boolean = false;
+
+        // Left container에 egretBird가 있다면 container를 드래그로 움직일 수 있음
         leftCon.addEventListener(egret.TouchEvent.TOUCH_BEGIN, () => {
             leftDrag = true;
         }, this); 
@@ -230,6 +228,7 @@ class Main extends egret.DisplayObjectContainer {
             }
         }, this); 
 
+        // Right container에 egretBird가 있다면 container를 드래그로 움직일 수 있음
         rightCon.addEventListener(egret.TouchEvent.TOUCH_BEGIN, () => {
             rightDrag = true;
         }, this); 

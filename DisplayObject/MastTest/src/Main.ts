@@ -145,13 +145,13 @@ class Main extends egret.DisplayObjectContainer {
 
     }
 
-    private launchMask():void {
+    private launchMask() {
 
         this.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
 
     }
 
-    private updateBird( stageX:number, stageY:number ):void {
+    private updateBird( stageX:number, stageY:number ) {
         /// The bird synchronizes finger position
         this._bird.x = stageX;
         this._bird.y = stageY;
@@ -163,16 +163,16 @@ class Main extends egret.DisplayObjectContainer {
             case egret.TouchEvent.TOUCH_MOVE:
                 this.updateBird( evt.stageX, evt.stageY );
                 break;
+            // 터치시 _shpBeMask에 Mask를 _bird로 지정함.
             case egret.TouchEvent.TOUCH_BEGIN:
                 this.stage.addEventListener( egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this );
                 this.stage.once( egret.TouchEvent.TOUCH_END, this.touchHandler, this );
 
-                /***  The key code section of this sample begins ***/
                 this._shpBeMask.mask = this._bird;
-                /*** The key code section of this sample ends ***/
                 
                 this.updateBird( evt.stageX, evt.stageY );
                 break;
+            // _shpBeMask에 Mask를 없앰. *_bird에도 maskedObject도 같이 없애는건 터치했을때 지정되었던 _bird의 mask 타겟도 없애줘야하는 거 같음
             case egret. TouchEvent.TOUCH_END:
                 this.stage.removeEventListener( egret.TouchEvent.TOUCH_MOVE, this.touchHandler, this );
                 this.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.touchHandler, this );
