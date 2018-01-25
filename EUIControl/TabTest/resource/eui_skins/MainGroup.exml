@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<e:Group class="components.MainGroup" touchThrough="true" xmlns:e="http://ns.egret.com/eui" xmlns:c="components.*"
+    verticalCenter="0" horizontalCenter="0" width="640" height="960" maxWidth="800" minWidth="450">
+    <e:Image source="border_png"   left="0" right="0" top="0" bottom="0"/>
+    <c:TabBar dataProvider="{viewStack}" width="150" x="0" y="103"/>
+    <e:ViewStack id="viewStack" verticalCenter="-105.5" left="63" top="-299" right="0" bottom="-88" selectedIndex="2">
+        <e:Group name="强化" height = "543" verticalCenter="1" horizontalCenter="0.5" width="404">
+					<e:Label text="您已打开强化面板" x="115" y="12" textColor="0x000000" size="24"/>
+        </e:Group>
+        <e:Group name="进阶" height = "543" verticalCenter="1" horizontalCenter="0.5" width="404">
+					<e:Label text="您已打开进阶面板" x="115" y="12" textColor="0x000000" size="24"/>
+        </e:Group>
+        <e:Group name="副本" height = "543" verticalCenter="1" horizontalCenter="0.5" width="404">
+					<e:Label text="您已打开副本面板" x="115" y="12" textColor="0x000000" size="24"/>
+        </e:Group>
+        <e:Group name="转生" height = "543" verticalCenter="1" horizontalCenter="0.5" width="404">
+					<e:Label text="您已打开转生面板" x="115" y="12" textColor="0x000000" size="24"/>
+        </e:Group>
+        <e:Group name="神器" height = "543" verticalCenter="1" horizontalCenter="0.5" width="404">
+					<e:Label text="您已打开神器面板" x="115" y="12" textColor="0x000000" size="24"/>
+        </e:Group>
+        <e:Group name="国战" height = "543" verticalCenter="1" horizontalCenter="0.5" width="404">
+					<e:Label text="您已打开国战面板" x="115" y="12" textColor="0x000000" size="24"/>
+        </e:Group>
+    </e:ViewStack>
+	<e:Label text="TabBar示例" textColor="0x000000" horizontalCenter="0.5" size="40" y="30"/>
+</e:Group>
