@@ -1,0 +1,45 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,cartoon-egret_00_png,cartoon-egret_01_png,cartoon-egret_02_png,cartoon-egret_03_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "cartoon-egret_00_png",
+			"type": "image",
+			"url": "assets/cartoon-egret_00.png"
+		},
+		{
+			"name": "cartoon-egret_01_png",
+			"type": "image",
+			"url": "assets/cartoon-egret_01.png"
+		},
+		{
+			"name": "cartoon-egret_02_png",
+			"type": "image",
+			"url": "assets/cartoon-egret_02.png"
+		},
+		{
+			"name": "cartoon-egret_03_png",
+			"type": "image",
+			"url": "assets/cartoon-egret_03.png"
+		}
+	]
+}
