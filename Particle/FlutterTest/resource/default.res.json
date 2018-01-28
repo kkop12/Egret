@@ -1,0 +1,55 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,bg_png,leaftexiao_json,leaftexiao_png,normalTree_png,silver_png,silverRain_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "bg_png",
+			"type": "image",
+			"url": "assets/particle2/bg.png"
+		},
+		{
+			"name": "leaftexiao_json",
+			"type": "json",
+			"url": "assets/particle2/leaftexiao.json"
+		},
+		{
+			"name": "leaftexiao_png",
+			"type": "image",
+			"url": "assets/particle2/leaftexiao.png"
+		},
+		{
+			"name": "normalTree_png",
+			"type": "image",
+			"url": "assets/particle2/normalTree.png"
+		},
+		{
+			"name": "silver_png",
+			"type": "image",
+			"url": "assets/particle2/silver.png"
+		},
+		{
+			"name": "silverRain_json",
+			"type": "json",
+			"url": "assets/particle2/silverRain.json"
+		}
+	]
+}

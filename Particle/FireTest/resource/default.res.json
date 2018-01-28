@@ -1,0 +1,40 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,ballParticle_json,ballParticle_png,firePot_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "ballParticle_json",
+			"type": "json",
+			"url": "assets/particle3/ballParticle.json"
+		},
+		{
+			"name": "ballParticle_png",
+			"type": "image",
+			"url": "assets/particle3/ballParticle.png"
+		},
+		{
+			"name": "firePot_png",
+			"type": "image",
+			"url": "assets/particle3/firePot.png"
+		}
+	]
+}
