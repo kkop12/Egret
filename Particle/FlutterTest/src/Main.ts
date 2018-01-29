@@ -112,6 +112,7 @@ class Main extends egret.DisplayObjectContainer {
         normalTree_png.touchEnabled = true;
         normalTree_png.addEventListener(egret.TouchEvent.TOUCH_TAP, this.rainHandler, this);
         
+        // 뒤쪽에서 떨어지는 빨강 꽃잎
         var texture = RES.getRes("leaftexiao_png");
         var config = RES.getRes("leaftexiao_json");
         this.systemLeaf = new particle.GravityParticleSystem(texture, config);
@@ -121,6 +122,7 @@ class Main extends egret.DisplayObjectContainer {
         this.rainHandler(null);
     }
 
+    // 터치하면 떨어지는 금색모형
     private rainHandler(e:egret.TouchEvent):void {
         if (this._rainParticle == null) {
             var texture = RES.getRes("silver_png");

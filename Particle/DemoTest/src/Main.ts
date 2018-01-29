@@ -97,7 +97,8 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        RES.getResByUrl("resource/assets/particle1/rock.png", function(texture:egret.Texture):void {
+        // 파티클로 쓸 텍스쳐와 설정들에 대해서 로드 
+        RES.getResByUrl("resource/assets/particle1/star.png", function(texture:egret.Texture):void {
             this._texture = texture;
             
             this.create();
@@ -109,7 +110,9 @@ class Main extends egret.DisplayObjectContainer {
         }, this, RES.ResourceItem.TYPE_JSON);
     }
 
+
     private create():void {
+
         if (this._texture && this._config ) {
             var system = new particle.GravityParticleSystem(this._texture, this._config);
             this.addChild(system);
@@ -117,6 +120,10 @@ class Main extends egret.DisplayObjectContainer {
             system.y = 400;
             system.x = 300;
             
+            // 텍스쳐 바꿈
+            // var newTexture = RES.getRes("firework_png");
+            // system.changeTexture(newTexture);
+
             var angle:number = 0;
             egret.startTick(function (timeStamp:number):boolean {
                 angle += -2;
