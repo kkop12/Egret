@@ -1,0 +1,76 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,all1_png,all2_png,all3_png,all4_png,ele_json,man_json,shiyijianbeijing_png,skin_json,texture_json,texture_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "all1_png",
+			"type": "image",
+			"url": "assets/all1.png"
+		},
+		{
+			"name": "all2_png",
+			"type": "image",
+			"url": "assets/all2.png"
+		},
+		{
+			"name": "all3_png",
+			"type": "image",
+			"url": "assets/all3.png"
+		},
+		{
+			"name": "all4_png",
+			"type": "image",
+			"url": "assets/all4.png"
+		},
+		{
+			"name": "ele_json",
+			"type": "json",
+			"url": "assets/ele.json"
+		},
+		{
+			"name": "man_json",
+			"type": "json",
+			"url": "assets/man.json"
+		},
+		{
+			"name": "shiyijianbeijing_png",
+			"type": "image",
+			"url": "assets/shiyijianbeijing.png"
+		},
+		{
+			"name": "skin_json",
+			"type": "sheet",
+			"url": "assets/skin.json",
+			"subkeys": "m_116002_png,m_122002_png,m_131002_png,m_106002_F_F_png,m_116002_F_L_png,m_116002_F_R_png,m_122002_F_L1_png,m_122002_F_R1_png,m_122002_F_S_png,m_131002_F_ASS_png,m_131002_F_L1_png,m_131002_F_L2_png,m_131002_F_R1_png,m_131002_F_R2_png,m_116003_png,m_122003_png,m_132003_png,m_106003_F_F_png,m_116003_F_L_png,m_116003_F_R_png,m_122003_F_L1_png,m_122003_F_R1_png,m_122003_F_S_png,mm_131003_F_ASS_png,mm_131003_F_L1_png,mm_131003_F_L2_png,mm_131003_F_R1_png,mm_131003_F_R2_png,m_116004_png,m_121004_png,m_131004_png,m_106004_F_F_png,m_116004_F_L_png,m_116004_F_R_png,m_121004_F_L1_png,m_121004_F_L2_png,m_121004_F_R1_png,m_121004_F_R2_png,m_121004_F_S_png,m_131004_F_ASS_png,m_131004_F_L1_png,m_131004_F_L2_png,m_131004_F_R1_png,m_131004_F_R2_png,item_m_121005_png,m_116005_png,m_106005_F_F_png,m_116005_F_L_png,m_116005_F_R_png,m_121005_F_L1_png,m_121005_F_L2_png,m_121005_F_R1_png,m_121005_F_R2_png,m_121005_F_S_png,m_131005_F_ASS_png,m_131005_F_L1_png,m_131005_F_L2_png,m_131005_F_R1_png,m_131005_F_R2_png,m_116011_png,m_121011_png,m_131011_png,m_106011_F_F_png,m_116011_F_L_png,m_116011_F_R_png,m_121011_F_L1_png,m_121011_F_L2_png,m_121011_F_R1_png,m_121011_F_R2_png,m_121011_F_S_png,m_131011_F_ASS_png,m_131011_F_L1_png,m_131011_F_L2_png,m_131011_F_R1_png,m_131011_F_R2_png,m_116012_png,m_122012_png,m_132012_png,m_106012_F_F_png,m_116012_F_L_png,m_116012_F_R_png,m_122012_F_L1_png,m_122012_F_R1_png,m_122012_F_S_png,m_132012_F_ASS_png,m_132012_F_L1_png,m_132012_F_L2_png,m_132012_F_R1_png,m_132012_F_R2_png,fanhui_png,fuzhuangge_png,gouwu_png,kuzi_png,shangyi_png,shuzidiban_png,taozhuang_png,toufa_2_png,tubiaoxuanzhong_png,wupinge_png,xiezi_png,xitongtubiaodiban_png,xuanzhong_png,xuanzhong2_png,zuanshi_png,gouwu_0_png,fanhui_0_png"
+		},
+		{
+			"name": "texture_json",
+			"type": "json",
+			"url": "assets/texture.json"
+		},
+		{
+			"name": "texture_png",
+			"type": "image",
+			"url": "assets/texture.png"
+		}
+	]
+}
