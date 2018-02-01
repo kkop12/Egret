@@ -163,10 +163,10 @@ var Main = (function (_super) {
             bird.anchorOffsetX = wHalfBird;
             bird.anchorOffsetY = hHalfBird;
             /// Random initial position
-            //bird.x = this._rectScope.x + this._rectScope.width * Math.random();
-            //bird.y = this._rectScope.y + this._rectScope.height * Math.random();
-            bird.x = 50 * i;
-            bird.y = 50 * i;
+            bird.x = this._rectScope.x + this._rectScope.width * Math.random();
+            bird.y = this._rectScope.y + this._rectScope.height * Math.random();
+            //bird.x = 50 * i;
+            //bird.y = 50 * i;
             bird.scaleX = bird.scaleY = Main.SCALE_BASE;
             this._vcBird.push(bird);
             this.addChild(bird);

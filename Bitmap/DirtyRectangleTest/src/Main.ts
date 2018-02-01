@@ -89,25 +89,24 @@ class Main extends egret.DisplayObjectContainer {
     private static SCALE_BASE:number = .5;
     private static SCALE_RANGE:number = .5;
 
-    private _vcBird:Array<egret.Bitmap>;    /// Save reference to all egret birds for easy management
-    private _vcMotion:Array<number>;      /// Index of moving birds at present
-    private _iMotionMode:number;            /// Movement modes
-    private _nScaleBase:number;                 /// The base of scale ratio
+    private _vcBird:Array<egret.Bitmap>;
+    private _vcMotion:Array<number>;
+    private _iMotionMode:number;
+    private _nScaleBase:number;
     
-    private _txInfo:egret.TextField;               /// text prompt
-    private _bgInfo:egret.Shape;               /// text background
+    private _txInfo:egret.TextField;
+    private _bgInfo:egret.Shape;
     
-    private _rectScope:egret.Rectangle;         /// The range the birds can appear (make sure they are not out of screen)
+    private _rectScope:egret.Rectangle;        
     /**
      * 创建游戏场景
      * Create a game scene
      */
     private createGameScene() {
-        //var bmd:egret.BitmapData = evt.currentTarget.data;
-
+        
+        // 그래픽 최적화, 모든 프레임에 자동 적용, 랜더링이 크게 줄어듬
         var bmd = RES.getRes("egret_01_small_png");
 
-        /// Producing definite numbers of egrets-birds
         var wHalfBird:number = bmd.width / 2;
         var hHalfBird:number = bmd.height / 2;
 
@@ -125,11 +124,11 @@ class Main extends egret.DisplayObjectContainer {
             bird.anchorOffsetY = hHalfBird;
 
             /// Random initial position
-            //bird.x = this._rectScope.x + this._rectScope.width * Math.random();
-            //bird.y = this._rectScope.y + this._rectScope.height * Math.random();
+            bird.x = this._rectScope.x + this._rectScope.width * Math.random();
+            bird.y = this._rectScope.y + this._rectScope.height * Math.random();
 
-            bird.x = 50 * i;
-            bird.y = 50 * i;
+            //bird.x = 50 * i;
+            //bird.y = 50 * i;
 
             bird.scaleX = bird.scaleY = Main.SCALE_BASE;
 
@@ -179,9 +178,9 @@ class Main extends egret.DisplayObjectContainer {
         
         /// animation
         this.stage.addEventListener( egret.Event.ENTER_FRAME, ( evt:egret.Event )=>{
-            /***  The key code section of this sample begins ***/
+            
             switch ( this._iMotionMode ){
-                case MotionMode.ROT:        /// Rotate and scale
+                case MotionMode.ROT:        
                     this._vcBird[ this._vcMotion[0] ].rotation += 3;
                     this._vcBird[ this._vcMotion[1] ].rotation -= 3;
                     this._vcBird[ this._vcMotion[2] ].rotation += 3;
@@ -201,7 +200,7 @@ class Main extends egret.DisplayObjectContainer {
                     this._vcBird[ this._vcMotion[2] ].x = xTo;
                     break;
             }
-            /***  The key code section of this sample ends ***/
+            
         }, this );
     }
 
