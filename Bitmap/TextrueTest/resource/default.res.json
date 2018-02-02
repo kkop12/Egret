@@ -1,0 +1,36 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,egret_icon_png,description_json,cartoon-egrets_json,resources_json,atlas",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "egret_icon_png",
+			"type": "image",
+			"url": "assets/egret_icon.png"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "atlas",
+			"type": "sheet",
+			"url": "cartoon-egrets.json",
+			"subkeys": "cartoon-egret_02_small,cartoon-egret_03_small,cartoon-egret_00_small,cartoon-egret_01_small"
+		},
+		{
+			"name": "resources_json",
+			"type": "json",
+			"url": "resources.json"
+		}
+	]
+}
