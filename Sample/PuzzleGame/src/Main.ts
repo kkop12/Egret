@@ -132,6 +132,12 @@ class Main extends egret.DisplayObjectContainer {
 
     private kb:KeyBoard;
     private keyState:boolean;
+    
+    private maps;
+
+    private index:number = 4;
+
+    private testNum:number;
     /**
      * 创建游戏场景
      * Create a game scene
@@ -139,34 +145,41 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {        
         let stageW = this.stage.stageWidth;
         let stageH = this.stage.stageHeight;
+
+        this.maps = new Array(4);
+
+        this.maps[0] = new Array<Map>(4);
+        this.maps[1] = new Array<Map>(4);
+        this.maps[2] = new Array<Map>(4);
+        this.maps[3] = new Array<Map>(4);
+
+        //console.log(typeof(this.maps));
         
-        let colorLabel = new egret.TextField();
-        colorLabel.textColor = 0xffffff;
-        colorLabel.width = stageW - 172;
-        colorLabel.textAlign = "center";
-        colorLabel.text = "Hello Egret";
-        colorLabel.size = 24;
-        colorLabel.x = 172;
-        colorLabel.y = 80;
-        this.addChild(colorLabel);
+        // 랜덤하게 2나 4 맵 생성
+        //this.addRandomMap();
+        //this.addRandomMap();
+        // console.log("col:"+ Math.floor(this.testNum/4));
+        // console.log("row:"+ this.testNum%4);
+        // console.log(this.maps[Math.floor(this.testNum/4)][this.testNum%4].getValue());
+        
+        // 맵 채우기 test
+        // for(let i = 0; i < this.index; i++)
+        // {
+        //     for(let j = 0; j < this.index; j++)
+        //     {
+        //         this.maps[i][j] = new Map(2);
+        //         console.log("x :" + j + " y :" + i + " " + this.maps[i][j].getValue());
+        //     }
+        // }
+        
+        this.drawMap();
 
-        let textfield = new egret.TextField();
-        this.addChild(textfield);
-        textfield.alpha = 0;
-        textfield.width = stageW - 172;
-        textfield.textAlign = egret.HorizontalAlign.CENTER;
-        textfield.size = 24;
-        textfield.textColor = 0xffffff;
-        textfield.x = 172;
-        textfield.y = 135;
-        this.textfield = textfield;
-
-        this.keyState = true;
-        var test = new egret.DisplayObjectContainer();
+        this.keyState = true;        
         
         this.kb = new KeyBoard();
         this.kb.addEventListener(KeyBoard.onkeydown,this.onkeydown,this);
-        this.kb.addEventListener(KeyBoard.onkeyup,this.onkeyup,this);        
+        //this.kb.addEventListener(KeyBoard.onkeyup,this.onkeyup,this);        
+
     }
     
     private onkeydown(event)
@@ -184,6 +197,56 @@ class Main extends egret.DisplayObjectContainer {
                 this.keyState = false;
                 console.log(event.data);
             }
+        }                
+    }
+
+    private addRandomMap(): void
+    {
+        let num,col,row:number;
+        
+        do
+        {
+            num = Math.floor(Math.random() * 15);
+            console.log("num :" + num);
+            this.testNum = num;
+            col = Math.floor(num / 4);
+            row = num % 4;
+
+            console.log("col :" + col);
+            console.log("row :" + row);
+
+        }while(this.maps[col][row] != null)
+
+        let temp = Math.random() < 0.5 ? 2 : 4;
+        this.maps[col][row] = new Map(temp);
+    }
+    
+    // Map 2차월 배열로 기본 값이나, 합쳐질 값 등을 다룬 다음에, 마지막에 TextField로 그려주는걸로 생각중    
+    private drawMap()
+    {        
+        for(let col = 0; col < 4; col++)
+        {
+            for(let row = 0; row < 4; row++)
+            {
+                if(this.maps[col][row] == null)
+                    continue;
+
+                let colorLabel = new egret.TextField();
+                colorLabel.textColor = 0xffffff;        
+                colorLabel.textAlign = "center";
+                colorLabel.verticalAlign = "middle";        
+                colorLabel.text = this.maps[col][row].getValue().toString();
+                colorLabel.size = 24;
+                colorLabel.x = row * 100 + 10;
+                colorLabel.y = col * 100 + 10;
+                colorLabel.width = 100;
+                colorLabel.height = 100;
+                colorLabel.border = true;
+                colorLabel.borderColor = 0xffffff;        
+                colorLabel.background = true;
+                colorLabel.backgroundColor = 0x000000;
+                this.addChild(colorLabel);
+            }
         }        
     }
 
@@ -199,4 +262,17 @@ class Main extends egret.DisplayObjectContainer {
     }
 }
 
+class Map
+{
+    private value:number;
 
+    public constructor(num:number) 
+    {
+        this.value = num;
+    }   
+
+    getValue(): number
+    {
+        return this.value;
+    }
+}
