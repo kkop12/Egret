@@ -138,6 +138,9 @@ class Main extends egret.DisplayObjectContainer {
     private index:number = 4;
 
     private testNum:number;
+
+    private prevPoint:egret.Point;
+    private moved:boolean = false;
     /**
      * 创建游戏场景
      * Create a game scene
@@ -145,6 +148,8 @@ class Main extends egret.DisplayObjectContainer {
     private createGameScene() {        
         let stageW = this.stage.stageWidth;
         let stageH = this.stage.stageHeight;
+
+        this.prevPoint = new egret.Point();
 
         this.maps = new Array(4);
 
@@ -174,10 +179,12 @@ class Main extends egret.DisplayObjectContainer {
         
         this.drawMap();
 
-        this.keyState = true;        
+        this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchHandler,this);
+
+        // this.keyState = true;        
         
-        this.kb = new KeyBoard();
-        this.kb.addEventListener(KeyBoard.onkeydown,this.onkeydown,this);
+        // this.kb = new KeyBoard();
+        // this.kb.addEventListener(KeyBoard.onkeydown,this.onkeydown,this);
         //this.kb.addEventListener(KeyBoard.onkeyup,this.onkeyup,this);        
 
     }
@@ -200,6 +207,49 @@ class Main extends egret.DisplayObjectContainer {
         }                
     }
 
+    private move(): void
+    {
+        // 위, 아래, 왼쪽, 오른쪽
+        
+
+
+    }
+
+    // 터치후 방향에 따른 관리
+    private touchHandler(evt:egret.TouchEvent)
+    {        
+        switch(evt.type)
+        {            
+            case egret.TouchEvent.TOUCH_BEGIN:
+                this.prevPoint.setTo(evt.stageX,evt.stageY);
+                console.log(this.prevPoint);
+
+                this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.touchHandler,this);
+                this.stage.once(egret.TouchEvent.TOUCH_END,this.touchHandler,this);
+            break;
+            case egret.TouchEvent.TOUCH_MOVE:
+                let currentX = evt.stageX - this.prevPoint.x;
+                let currentY = evt.stageY - this.prevPoint.y;
+                
+                if(!this.moved)
+                {
+                    if(currentX < -50){console.log("왼쪽"); this.moved = true; }  // 왼쪽              
+                    else if(currentX > 50){ console.log("오른쪽"); this.moved = true; } // 오른쪽
+                    else if(currentY < -50){ console.log("위쪽"); this.moved = true; } // 위쪽
+                    else if(currentY > 50) { console.log("아래쪽"); this.moved = true;} // 아래쪽                    
+                }
+                
+            break;
+            case egret.TouchEvent.TOUCH_END:
+                this.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,this.touchHandler,this);
+                this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchHandler,this);
+                this.prevPoint.normalize;
+                this.moved = false;
+            break;
+        }
+    }
+
+    // 맵 하나 랜덤 생성
     private addRandomMap(): void
     {
         let num,col,row:number;
