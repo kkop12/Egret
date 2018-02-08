@@ -178,7 +178,7 @@ class Main extends egret.DisplayObjectContainer {
         // }
         
         this.drawMap();
-
+        
         this.stage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchHandler,this);
 
         // this.keyState = true;        
@@ -207,12 +207,40 @@ class Main extends egret.DisplayObjectContainer {
         }                
     }
 
-    private move(): void
+    private move(maxCount: number, nextD: number): void
     {
-        // 위, 아래, 왼쪽, 오른쪽
-        
+        // 위 0,0 -> 3,0 , 아래 3,0 -> 0,0  
+        // 왼쪽 0,0 -> 0,3, 오른쪽 0,3 -> 0,0
+        let currX, currY, nextX, nextY;
+        currY = maxCount;
 
+        // 위 , 아래
+        for(let i = 0; i < this.index ; i++)
+        {            
+            // maps[maxCount][i]
+            while(currY >= 0 && currY < this.index)
+            {
+                if(this.maps[currY][i] == null)
+                {
+                    nextY = currY;
+                    currY += nextD; 
+                    console.log("ok");                    
+                    continue;                    
+                }   
+            }
+        }
 
+        // 왼쪽, 오른쪽
+        // for(let i = 0; i < this.index ; i++)
+        // {
+        //     // maps[i][maxCount]
+        //     while(maxCount >= 0 && maxCount < this.index)
+        //     {
+                
+
+        //         maxCount += nextD;
+        //     }
+        // }        
     }
 
     // 터치후 방향에 따른 관리
@@ -267,7 +295,7 @@ class Main extends egret.DisplayObjectContainer {
 
         }while(this.maps[col][row] != null)
 
-        let temp = Math.random() < 0.5 ? 2 : 4;
+        let temp = Math.random() < 0.7 ? 2 : 4;
         this.maps[col][row] = new Map(temp);
     }
     
