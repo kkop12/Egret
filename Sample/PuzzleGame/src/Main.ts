@@ -141,6 +141,7 @@ class Main extends egret.DisplayObjectContainer {
 
     private prevPoint:egret.Point;
     private moved:boolean = false;
+    
     /**
      * 创建游戏场景
      * Create a game scene
@@ -161,8 +162,10 @@ class Main extends egret.DisplayObjectContainer {
         //console.log(typeof(this.maps));
         
         // 랜덤하게 2나 4 맵 생성
-        //this.addRandomMap();
-        //this.addRandomMap();
+        this.addRandomMap();
+        this.addRandomMap();
+        this.addRandomMap();
+
         // console.log("col:"+ Math.floor(this.testNum/4));
         // console.log("row:"+ this.testNum%4);
         // console.log(this.maps[Math.floor(this.testNum/4)][this.testNum%4].getValue());
@@ -212,23 +215,59 @@ class Main extends egret.DisplayObjectContainer {
         // 위 0,0 -> 3,0 , 아래 3,0 -> 0,0  
         // 왼쪽 0,0 -> 0,3, 오른쪽 0,3 -> 0,0
         let currX, currY, nextX, nextY;
-        currY = maxCount;
+        //currY = maxCount;
 
         // 위 , 아래
         for(let i = 0; i < this.index ; i++)
-        {            
+        {   
+            // nextY = maxCount - nextD; // 현재 위치보다 다음 값( 위 or 아래 )
+            // currY = maxCount; // 현재 위치
+
+            nextY = maxCount;
+            currY = maxCount + nextD;
+                      
             // maps[maxCount][i]
-            while(currY >= 0 && currY < this.index)
+            while(currY >= 0 && currY < 4)
             {
-                if(this.maps[currY][i] == null)
+                var next:Map = this.maps[nextY][i];
+                var curr:Map = this.maps[currY][i];
+
+                console.log("currentY : " + currY + " currentX : " + i);
+
+                if(next == null)
                 {
-                    nextY = currY;
-                    currY += nextD; 
-                    console.log("ok");                    
-                    continue;                    
-                }   
+                    this.maps[nextY][i] = curr;
+                    this.maps[currY][i] = null;
+                    //nextY = currY;
+                    console.log("currY : " + currY + " nextY : " + nextY + " ok");                    
+                    currY += nextD;                                         
+                    nextY = maxCount;
+                }
+                else if(currY == nextY + nextD && curr != null && next.canMerge(curr))
+                {
+                    console.log("merge");
+                    next.doMerge();
+                    this.maps[currY][i] = null;
+                    currY += nextD;
+                    nextY = maxCount;
+                }
+                else
+                {
+                    nextY += nextD;
+
+                    if(currY == nextY)
+                    {
+                        currY += nextD;
+                        nextY = maxCount;
+                    }                    
+                }
+
+                //nextY = maxCount;   
             }
         }
+
+        this.addRandomMap();
+        this.drawMap();
 
         // 왼쪽, 오른쪽
         // for(let i = 0; i < this.index ; i++)
@@ -263,8 +302,8 @@ class Main extends egret.DisplayObjectContainer {
                 {
                     if(currentX < -50){console.log("왼쪽"); this.moved = true; }  // 왼쪽              
                     else if(currentX > 50){ console.log("오른쪽"); this.moved = true; } // 오른쪽
-                    else if(currentY < -50){ console.log("위쪽"); this.moved = true; } // 위쪽
-                    else if(currentY > 50) { console.log("아래쪽"); this.moved = true;} // 아래쪽                    
+                    else if(currentY < -50){ console.log("위쪽"); this.moved = true; this.move(0,1); } // 위쪽
+                    else if(currentY > 50) { console.log("아래쪽"); this.moved = true; this.move(3,-1); } // 아래쪽                    
                 }
                 
             break;
@@ -282,13 +321,37 @@ class Main extends egret.DisplayObjectContainer {
     {
         let num,col,row:number;
         
+        let randomCell:Array<egret.Point> = [];
+
+        // 밑 do while으로 썼을때 1~3개 남았을때의 랜덤생성이 너무 오래 걸림
+        // 없는 칸만 따로 추려서 그 사이에서만 랜덤생성이 되게 바꿈
+        for(let i = 0; i < this.index ; i++)
+        {
+            for(let j = 0; j < this.index ; j++)
+            {
+                if(this.maps[i][j] == null)
+                {
+                    randomCell.push(new egret.Point(i,j));
+                }
+            }
+        }
+
         do
         {
-            num = Math.floor(Math.random() * 15);
-            console.log("num :" + num);
-            this.testNum = num;
-            col = Math.floor(num / 4);
-            row = num % 4;
+            // Math.random()*vcIdxLocation.length
+            // num = Math.floor(Math.random() * 15);
+            // console.log("num :" + num);
+            // this.testNum = num;
+            // col = Math.floor(num / 4);
+            // row = num % 4;
+
+            // console.log("col :" + col);
+            // console.log("row :" + row);
+
+            num = Math.floor(Math.random() * randomCell.length);
+                        
+            col = randomCell[num].x;
+            row = randomCell[num].y;
 
             console.log("col :" + col);
             console.log("row :" + row);
@@ -301,7 +364,8 @@ class Main extends egret.DisplayObjectContainer {
     
     // Map 2차월 배열로 기본 값이나, 합쳐질 값 등을 다룬 다음에, 마지막에 TextField로 그려주는걸로 생각중    
     private drawMap()
-    {        
+    {
+        this.removeChildren();       
         for(let col = 0; col < 4; col++)
         {
             for(let row = 0; row < 4; row++)
@@ -352,5 +416,15 @@ class Map
     getValue(): number
     {
         return this.value;
+    }
+
+    canMerge(other:Map):boolean
+    {
+        return this.value == other.getValue() ? true : false;
+    }
+
+    doMerge():void
+    {
+        this.value *= 2;
     }
 }
