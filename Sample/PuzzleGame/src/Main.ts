@@ -142,6 +142,7 @@ class Main extends egret.DisplayObjectContainer {
     private prevPoint:egret.Point;
     private moved:boolean = false;
     
+    private mouseType = Object.freeze({UP:0,DOWN:1,RIGHT:2,LEFT:3});
     /**
      * 创建游戏场景
      * Create a game scene
@@ -210,76 +211,118 @@ class Main extends egret.DisplayObjectContainer {
         }                
     }
 
-    private move(maxCount: number, nextD: number): void
+    private move(type:number,maxCount: number, nextD: number): void
     {
         // 위 0,0 -> 3,0 , 아래 3,0 -> 0,0  
         // 왼쪽 0,0 -> 0,3, 오른쪽 0,3 -> 0,0
         let currX, currY, nextX, nextY;
         //currY = maxCount;
 
-        // 위 , 아래
-        for(let i = 0; i < this.index ; i++)
-        {   
-            // nextY = maxCount - nextD; // 현재 위치보다 다음 값( 위 or 아래 )
-            // currY = maxCount; // 현재 위치
+        switch(type)
+        {
+            case this.mouseType.UP:
+            case this.mouseType.DOWN:
+            // 위 , 아래
+            for(let i = 0; i < this.index ; i++)
+            {   
+                // nextY = maxCount - nextD; // 현재 위치보다 다음 값( 위 or 아래 )
+                // currY = maxCount; // 현재 위치
 
-            nextY = maxCount;
-            currY = maxCount + nextD;
-                      
-            // maps[maxCount][i]
-            while(currY >= 0 && currY < 4)
-            {
-                var next:Map = this.maps[nextY][i];
-                var curr:Map = this.maps[currY][i];
-
-                console.log("currentY : " + currY + " currentX : " + i);
-
-                if(next == null)
+                nextY = maxCount;
+                currY = maxCount + nextD;
+                        
+                // maps[maxCount][i]
+                while(currY >= 0 && currY < this.index)
                 {
-                    this.maps[nextY][i] = curr;
-                    this.maps[currY][i] = null;
-                    //nextY = currY;
-                    console.log("currY : " + currY + " nextY : " + nextY + " ok");                    
-                    currY += nextD;                                         
-                    nextY = maxCount;
-                }
-                else if(currY == nextY + nextD && curr != null && next.canMerge(curr))
-                {
-                    console.log("merge");
-                    next.doMerge();
-                    this.maps[currY][i] = null;
-                    currY += nextD;
-                    nextY = maxCount;
-                }
-                else
-                {
-                    nextY += nextD;
+                    var next:Map = this.maps[nextY][i];
+                    var curr:Map = this.maps[currY][i];
 
-                    if(currY == nextY)
+                    console.log("currentY : " + currY + " currentX : " + i);
+
+                    if(next == null)
                     {
+                        this.maps[nextY][i] = curr;
+                        this.maps[currY][i] = null;
+                        //nextY = currY;
+                        console.log("currY : " + currY + " nextY : " + nextY + " ok");                    
+                        currY += nextD;                                         
+                        nextY = maxCount;
+                    }
+                    else if(currY == nextY + nextD && curr != null && next.canMerge(curr))
+                    {
+                        console.log("merge");
+                        next.doMerge();
+                        this.maps[currY][i] = null;
                         currY += nextD;
                         nextY = maxCount;
+                    }
+                    else
+                    {
+                        nextY += nextD;
+
+                        if(currY == nextY)
+                        {
+                            currY += nextD;
+                            nextY = maxCount;
+                        }                    
+                    }
+
+                    //nextY = maxCount;   
+                }
+            }
+
+            break;
+            case this.mouseType.RIGHT:
+            case this.mouseType.LEFT:
+
+            for(let i = 0; i < this.index ; i++)
+            {   
+                
+                nextX = maxCount;
+                currX = maxCount + nextD;
+                
+                while(currX >= 0 && currX < this.index)
+                {
+                    var next:Map = this.maps[i][nextX];
+                    var curr:Map = this.maps[i][currX];
+
+                    console.log("currentX : " + currX + " currentY : " + i);
+
+                    if(next == null)
+                    {
+                        this.maps[i][nextX] = curr;
+                        this.maps[i][currX] = null;
+                        
+                        console.log("currY : " + currX + " nextY : " + nextX + " ok");                    
+                        currX += nextD;                                         
+                        nextX = maxCount;
+                    }
+                    else if(currX == nextX + nextD && curr != null && next.canMerge(curr))
+                    {
+                        console.log("merge");
+                        next.doMerge();
+                        this.maps[i][currX] = null;
+                        currX += nextD;
+                        nextX = maxCount;
+                    }
+                    else
+                    {
+                        nextX += nextD;
+
+                        if(currX == nextX)
+                        {
+                            currX += nextD;
+                            nextX = maxCount;
+                        }                    
                     }                    
                 }
-
-                //nextY = maxCount;   
             }
+
+            break;
         }
 
         this.addRandomMap();
         this.drawMap();
-
-        // 왼쪽, 오른쪽
-        // for(let i = 0; i < this.index ; i++)
-        // {
-        //     // maps[i][maxCount]
-        //     while(maxCount >= 0 && maxCount < this.index)
-        //     {
-                
-
-        //         maxCount += nextD;
-        //     }
-        // }        
     }
 
     // 터치후 방향에 따른 관리
@@ -300,10 +343,10 @@ class Main extends egret.DisplayObjectContainer {
                 
                 if(!this.moved)
                 {
-                    if(currentX < -50){console.log("왼쪽"); this.moved = true; }  // 왼쪽              
-                    else if(currentX > 50){ console.log("오른쪽"); this.moved = true; } // 오른쪽
-                    else if(currentY < -50){ console.log("위쪽"); this.moved = true; this.move(0,1); } // 위쪽
-                    else if(currentY > 50) { console.log("아래쪽"); this.moved = true; this.move(3,-1); } // 아래쪽                    
+                    if(currentX < -50){console.log("왼쪽"); this.moved = true; this.move(this.mouseType.LEFT,0,1); }  // 왼쪽              
+                    else if(currentX > 50){ console.log("오른쪽"); this.moved = true; this.move(this.mouseType.RIGHT,3,-1); } // 오른쪽
+                    else if(currentY < -50){ console.log("위쪽"); this.moved = true; this.move(this.mouseType.UP,0,1); } // 위쪽
+                    else if(currentY > 50) { console.log("아래쪽"); this.moved = true; this.move(this.mouseType.DOWN,3,-1); } // 아래쪽                    
                 }
                 
             break;
